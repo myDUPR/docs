@@ -5,11 +5,57 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="apple-mobile-web-app-title" content="DUPR">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#FFFFFF">
+
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="images/icons/ms-icon-144x144-30d96ba6.png">
+    <meta name="theme-color" content="#FFFFFF">
+      
         <meta
             name="description"
-            content="Documentation for the Kittn API"
+            content="Documentation for the DUPR APIs"
         >
-    <title>API Reference</title>
+        <meta
+            name="keywords"
+            content="DUPR,Ratings,API,Documentation"
+        >
+
+    <title>DUPR - API Reference Document</title>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-icon-57x57-01de49cd.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/icons/apple-icon-60x60-a1a457fb.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/apple-icon-72x72-7a749d25.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-icon-76x76-1dc866b6.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/apple-icon-114x114-3183d71a.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/icons/apple-icon-120x120-eeade8af.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-icon-144x144-30d96ba6.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/icons/apple-icon-152x152-37795c39.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-icon-180x180-9f52e34b.png">
+
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/android-icon-192x192-17045e37.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32-9ad9e2d1.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/icons/favicon-96x96-d30d8d7b.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16-0701e8db.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.mydupr.com">
+    <meta property="og:title" content="DUPR APIs Documentation">
+    <meta property="og:description" content="An accurate rating algorithm to find other pickleball players at your skill level.">
+    <meta property="og:image" content="https://dupr.s3.amazonaws.com/static/logo/dupr_light.png">
+    <!--\\ Open Graph / Facebook -->
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://docs.mydupr.com">
+    <meta property="twitter:title" content="DUPR APIs Documentation">
+    <meta property="twitter:description" content="An accurate rating algorithm to find other pickleball players at your skill level.">
+    <meta property="twitter:image" content="https://dupr.s3.amazonaws.com/static/logo/dupr_light.png">
+    <!--\\ Twitter -->
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -295,20 +341,17 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
-        NAV
+        MENU
         <img src="images/navbar-cad8cdcb.png" alt="" />
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-1e815a84.png" class="logo" alt="" />
+      <img src="images/logo-e110b075.png" class="logo" alt="" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -319,19 +362,27 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#generate-credentials" class="toc-h1 toc-link" data-title="Generate Credentials">Generate Credentials</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#client-secret" class="toc-h2 toc-link" data-title="Client Secret">Client Secret</a>
+                  </li>
+                  <li>
+                    <a href="#client-keys" class="toc-h2 toc-link" data-title="Client Keys">Client Keys</a>
+                  </li>
+                  <li>
+                    <a href="#environments" class="toc-h2 toc-link" data-title="Environments">Environments</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
-                  </li>
-                  <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#search" class="toc-h2 toc-link" data-title="Search">Search</a>
                   </li>
               </ul>
           </li>
@@ -340,198 +391,494 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://mydupr.com/'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://mydupr.com/'>© 2023 DUPR</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the DUPR API! You can use our API to upload matches in bulk, search players, get player ratings, fetch DUPR club members ratings, etc. from our database.</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<h1 id='generate-credentials'>Generate Credentials</h1>
+<p>To access these APIs you need to request client <strong>secret</strong> and <strong>key</strong> by contacting us via email on <a href="mailto:support@mydupr.com">support@mydupr.com</a>. Please mention your buiness entity name, contact email address and contact person name in request email. Generating client secret and key might take 1 - 3 working days. Once both client key and secret is generated you will receive it on provided offical email address.</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
+<p>Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.</p>
+<h3 id='client-secret'>Client Secret</h3>
+<blockquote>
+<p>cs-008a8f63f1fd5433fb2ea1a25fdec9c8</p>
+</blockquote>
+
+<p>Secret is unique and confidential information for each client. It starts with <code>cs-</code> followed by a random hash string. Client secret never changes it remains same for all client keys.</p>
+<h3 id='client-keys'>Client Keys</h3>
+<blockquote>
+<p>ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be</p>
+</blockquote>
+
+<p>Keys are configurable tokens and can be more than one for a client. Authorities could be different for each key, like a key is used to fetch player rating and another key is used to only upload matches. Keys starts with <code>ck-</code> followed by 5 hyphen separated hash strings.</p>
+<h3 id='environments'>Environments</h3>
+<blockquote>
+<p>test-cs-008a8f63f1fd42e3fb2ea1a25fdec9c8<br>
+test-ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be</p>
+</blockquote>
+
+<p>We have two <strong>Production</strong> and <strong>Test</strong> different environments and we provide two different credentials at the time of registration. You can use test credentials on test environment while you are developing your functionalities. Once you go live you need to replace test credentials with production credentials in your application to access Production data.</p>
+
+<p>Following are base url to access API endpoints:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Environment</th>
+<th style="text-align: center">Base URL</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">Production</td>
+<td style="text-align: center">-</td>
+</tr>
+<tr>
+<td style="text-align: center">Test</td>
+<td style="text-align: center">https://uat.mydupr.com/api/</td>
+</tr>
+</tbody></table>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>Combine your client key and secret as show below.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be:cs-008a8f63f1fd5433fb2ea1a25fdec9c8
 </code></pre></div>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>When above combination is Base64 encoded it should return following string.</p>
 </blockquote>
+<div class="highlight"><pre class="highlight plaintext tab-plaintext"><code>Y2stNmY2ZTlmM2QtY2E5Mi00OWE1LWZjZWQtMWJjYzM2ZWMxMjdiZTpjcy0wMDhhOGY2M2YxZmQ1NDMzZmIyZWExYTI1ZmRlYzljOA==
+</code></pre></div>
+<blockquote>
+<p>To authorize, use this code command with your actual credentials:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="nt">-X</span> POST <span class="s2">"https://&lt;base-url&gt;/auth/v1.0/token"</span> <span class="se">\</span>
+   <span class="nt">-H</span> <span class="s2">"x-authorization: &lt;your-credentials&gt;"</span>
+</code></pre></div>
+<blockquote>
+<p>Make sure to replace <code>&lt;base-url&gt;</code> with appropriate environment base url and <code>&lt;your-credentials&gt;</code> with combination of your API credentials.</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>The above command returns response in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJSUzUxMiJ9.&lt;access-token&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"expiry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-02T17:21:23Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Authentication API accepts combination of client key and secret colon separated (<code>:</code>) encoded in form of Base64 string and returns a short lived temporary access token. </p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>For example if your client secret is <code>cs-008a8f63f1fd5433fb2ea1a25fdec9c8</code> and your key is <code>ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be</code> then combine it as show below and encode it in Base64 string.</p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+<p>Test credentials have prefix <code>test-</code>, for example <code>test-ck-&lt;hash&gt;</code> or <code>test-cs-&lt;hash&gt;</code>.</p>
+
+<p>Make a request to authenticate using credentials as the special header paramter as shown below:</p>
+
+<p><code>x-authorization: &lt;your-credentials&gt;</code></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>&lt;your-credentials&gt;</code> with your Base64 encoded API credentials.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves all kittens.</p>
+<h1 id='user'>User</h1>
+<p>This resource provides APIs to get user ratings and allows you to create an unclaimed DUPR account for the users which are not on the platform.</p>
+<h2 id='search'>Search</h2>
+<p>Top-level API resource to have support via retrieval via &quot;search&quot; API methods. DUPR search API methods utilize cursor-based pagination via the <code>offset</code> parameter. For example you can make a initial request with <code>offset=0</code> or exclude <code>offset</code> parameter from request and then in subsequent calls keep on incrementing <code>offset</code> with <code>limit</code> i.e. <code>offset += limit</code>.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p><code>GET https://&lt;base-url&gt;/user/{version}/search</code></p>
+<h3 id='request-body-paramters'>Request Body Paramters</h3>
+<blockquote>
+<p>Example search request to reterive male users between 18 to 25 age lives in Austin, TX, USA with reliable doubles ratings between 2.3 and 3.3.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MALE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Austin, TX, USA"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"radiusInMeters"</span><span class="p">:</span><span class="w"> </span><span class="mf">40233.6</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"max"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"min"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"reliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DOUBLES"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>To search users run this command with your access token.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s2">"https://&lt;base-url&gt;/user/v1.0/search"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"accept: application/json"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer eyJhbGciOiJSUzUxMiJ9."</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     <span class="nt">-d</span> <span class="s2">"{ 
+          </span><span class="se">\"</span><span class="s2">query</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">*</span><span class="se">\"</span><span class="s2">,
+          </span><span class="se">\"</span><span class="s2">limit</span><span class="se">\"</span><span class="s2">: 25,
+          </span><span class="se">\"</span><span class="s2">offset</span><span class="se">\"</span><span class="s2">: 0,
+          </span><span class="se">\"</span><span class="s2">filters</span><span class="se">\"</span><span class="s2">: { 
+              </span><span class="se">\"</span><span class="s2">age</span><span class="se">\"</span><span class="s2">: { 
+                  </span><span class="se">\"</span><span class="s2">max</span><span class="se">\"</span><span class="s2">: 25, 
+                  </span><span class="se">\"</span><span class="s2">min</span><span class="se">\"</span><span class="s2">: 18 
+              }, 
+              </span><span class="se">\"</span><span class="s2">gender</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">MALE</span><span class="se">\"</span><span class="s2">, 
+              </span><span class="se">\"</span><span class="s2">location</span><span class="se">\"</span><span class="s2">: { 
+                  </span><span class="se">\"</span><span class="s2">address</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Austin, TX, USA</span><span class="se">\"</span><span class="s2">, 
+                  </span><span class="se">\"</span><span class="s2">radiusInMeters</span><span class="se">\"</span><span class="s2">: 40233.6 
+              }, 
+              </span><span class="se">\"</span><span class="s2">rating</span><span class="se">\"</span><span class="s2">: { 
+                  </span><span class="se">\"</span><span class="s2">max</span><span class="se">\"</span><span class="s2">: 3.3, 
+                  </span><span class="se">\"</span><span class="s2">min</span><span class="se">\"</span><span class="s2">: 2.3, 
+                  </span><span class="se">\"</span><span class="s2">reliable</span><span class="se">\"</span><span class="s2">: true, 
+                  </span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">DOUBLES</span><span class="se">\"</span><span class="s2"> 
+              } 
+          }
+        }"</span>
+</code></pre></div>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th style="text-align: center">Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>query</td>
+<td style="text-align: center">*</td>
+<td>The search query string, e.g. first or last name of a user.</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>offset</td>
+<td style="text-align: center">0</td>
+<td>A cursor for pagination across multiple pages of results. Set <code>0</code> or don’t include this parameter on the first call.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td style="text-align: center">20</td>
+<td>A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.</td>
+</tr>
+<tr>
+<td>filters</td>
+<td style="text-align: center"><code>null</code></td>
+<td>Filters applied to this session that restrict the kinds of users to collect.</td>
+</tr>
+</tbody></table>
+<h3 id='filter-facets'>Filter Facets</h3>
+<table><thead>
+<tr>
+<th>Facet</th>
+<th style="text-align: center">Type</th>
+<th style="text-align: center">Parameters</th>
+<th style="text-align: center">Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>age</td>
+<td style="text-align: center">object</td>
+<td style="text-align: center"></td>
+<td style="text-align: center">-</td>
+<td>Object criteria to restrict results based on user&#39;s age.</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center"></td>
+<td style="text-align: center">min</td>
+<td style="text-align: center">-</td>
+<td>Minimum user age in years, 0 or more.</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center"></td>
+<td style="text-align: center">max</td>
+<td style="text-align: center">-</td>
+<td>Maximum user age in years, 1 or more (must be greater than minimum age).</td>
+</tr>
+<tr>
+<td>gender</td>
+<td style="text-align: center">Enum</td>
+<td style="text-align: center">-</td>
+<td style="text-align: center">-</td>
+<td>Value criteria to restrict results based on gender, value must be either <code>MALE</code> or <code>FEMALE</code>.</td>
+</tr>
+<tr>
+<td>location</td>
+<td style="text-align: center">object</td>
+<td style="text-align: center"></td>
+<td style="text-align: center">-</td>
+<td>Object criteria to restrict results based on user&#39;s high level location.</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center"></td>
+<td style="text-align: center">address</td>
+<td style="text-align: center">-</td>
+<td>Street level address in format (&lt;<code>street</code>&gt;, &lt;<code>county / city</code>&gt;, &lt;<code>state / region</code>&gt;, &lt;<code>country</code>&gt;). This is an optional parameter in case you do not have lat / long of the user location.</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center"></td>
+<td style="text-align: center">lat</td>
+<td style="text-align: center">-</td>
+<td>The geographic latitude of user&#39;s approximate location.</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center"></td>
+<td style="text-align: center">lng</td>
+<td style="text-align: center">-</td>
+<td>The geographic longitude of user&#39;s approximate location.</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center"></td>
+<td style="text-align: center">radiusInMeters</td>
+<td style="text-align: center">40233.6 (25 miles)</td>
+<td>Radius in meters to restrict user&#39;s from a specific region.</td>
+</tr>
+<tr>
+<td>rating</td>
+<td style="text-align: center">object</td>
+<td style="text-align: center"></td>
+<td style="text-align: center">-</td>
+<td>Object criteria to restrict results based on user&#39;s rating.</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center"></td>
+<td style="text-align: center">min</td>
+<td style="text-align: center">2.0</td>
+<td>Minimum value of user ratings can be down to 2.0.</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center"></td>
+<td style="text-align: center">max</td>
+<td style="text-align: center">8.0</td>
+<td>Maximum value of user ratings can be up to 8.0.</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center"></td>
+<td style="text-align: center">reliable</td>
+<td style="text-align: center"><code>null</code></td>
+<td>User&#39;s rating should be reliable or not, by default <code>null</code> which means it is not considered while fetch results.</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center"></td>
+<td style="text-align: center">type</td>
+<td style="text-align: center">-</td>
+<td>Type of ratings to apply min and max values, it should be either <code>SINGLES</code> or <code>DOUBLES</code>.</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<aside class="notice">
+You can filter results with 4 major facets: age, gender, location and rating. You can use one or any combination of the facets to narrow down the search.
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
+<h3 id='response-parameters'>Response Parameters</h3>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalValueRelation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EQUAL_TO"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hasMore"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hasPrevious"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"empty"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8DJ7YL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kainoa Reponte"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kainoa"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reponte"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MALE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Austin, TX, US"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"singles"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"isSinglesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"doubles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.97"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"isDoublesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17LQG0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Christian Lee"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Christian"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lee"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MALE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manor, TX, US"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"singles"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"isSinglesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"doubles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.54"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"isDoublesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3ZVQJP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lexian Andrushko"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lexian"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andrushko"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MALE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Austin, TX, US"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"singles"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"isSinglesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"doubles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.25"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"isDoublesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves a specific kitten.</p>
+<p>List of all users matching search request criteria.</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<p><strong>Common pagination parameters:</strong></p>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th style="text-align: center">Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>offset</td>
+<td style="text-align: center">int</td>
+<td>A cursor for pagination across multiple pages of results sent in request.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td style="text-align: center">int</td>
+<td>A limit on the number of objects to be returned sent in request.</td>
+</tr>
+<tr>
+<td>total</td>
+<td style="text-align: center">int</td>
+<td>Total number of results avaiable.</td>
+</tr>
+<tr>
+<td>totalValueRelation</td>
+<td style="text-align: center">enum</td>
+<td>Relation with total value, <code>EQUAL_TO</code> for exact number and <code>GREATER_THAN_OR_EQUAL_TO</code> in case total number is greater than or equal to value of actual.</td>
+</tr>
+<tr>
+<td>hasMore</td>
+<td style="text-align: center">boolean</td>
+<td>Are there more results match request criteria.</td>
+</tr>
+<tr>
+<td>hasPrevious</td>
+<td style="text-align: center">boolean</td>
+<td><code>true</code> if there are any previous results, always <code>false</code> for first request.</td>
+</tr>
+<tr>
+<td>empty</td>
+<td style="text-align: center">boolean</td>
+<td>If hits is an empty array.</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p><strong>User specific parameters:</strong></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-X</span> DELETE <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th style="text-align: center">Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>id</td>
+<td style="text-align: center">string</td>
+<td>Unique identifier for the user, generally known as DUPR ID.</td>
+</tr>
+<tr>
+<td>fullName</td>
+<td style="text-align: center">string</td>
+<td>Person&#39;s full name.</td>
+</tr>
+<tr>
+<td>firstName</td>
+<td style="text-align: center">string</td>
+<td>The person’s first name.</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td style="text-align: center">string</td>
+<td>The person’s last name.</td>
+</tr>
+<tr>
+<td>gender</td>
+<td style="text-align: center">enum</td>
+<td>The person’s gender (International regulations require either “male” or “female”).</td>
+</tr>
+<tr>
+<td>age</td>
+<td style="text-align: center">int</td>
+<td>The person’s age in years.</td>
+</tr>
+<tr>
+<td>address</td>
+<td style="text-align: center">string</td>
+<td>City level address in format (&lt;<code>county / city</code>&gt;, &lt;<code>state / region</code>&gt;, &lt;<code>country</code>&gt;).</td>
+</tr>
+<tr>
+<td>ratings</td>
+<td style="text-align: center">object</td>
+<td>An object representation of ratings <code>singles</code> and <code>doubles</code>.</td>
+</tr>
+<tr>
+<td>singles</td>
+<td style="text-align: center">object</td>
+<td>Singles rating of user. Default is <code>null</code>. Float value between 2.0 and 8.0.</td>
+</tr>
+<tr>
+<td>isSinglesReliable</td>
+<td style="text-align: center">boolean</td>
+<td>Weather singles rating of this person is reliable or not.</td>
+</tr>
+<tr>
+<td>doubles</td>
+<td style="text-align: center">object</td>
+<td>Doubles rating of user. Default is <code>null</code>. Float value between 2.0 and 8.0.</td>
+</tr>
+<tr>
+<td>isDoublesReliable</td>
+<td style="text-align: center">boolean</td>
+<td>Weather doubles rating of this person is reliable or not.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
+<p>DUPR uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the <code>2xx</code> range indicate success. Codes in the <code>4xx</code> range indicate an error that failed given the information provided (e.g., a required parameter was omitted, a charge failed, etc.). Codes in the <code>5xx</code> range indicate an error with DUPR&#39;s servers (these are rare).</p>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>Some 4xx errors that could be handled programmatically (e.g., a token is expired).</p>
+
+<p>The DUPR API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -545,19 +892,19 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>Unauthorized -- Your API credentials are wrong or expired.</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>Forbidden -- The requested is hidden for administrators only.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>Not Found -- The specified resource could not be found.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+<td>Method Not Allowed -- You tried to access a resource with an invalid method.</td>
 </tr>
 <tr>
 <td>406</td>
@@ -565,15 +912,11 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 <tr>
 <td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
+<td>Gone -- The resource requested has been removed from our servers.</td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests -- You&#39;re requesting too many resources! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
@@ -589,9 +932,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
