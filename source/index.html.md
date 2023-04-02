@@ -1,15 +1,17 @@
 ---
-title: API Reference
+title: DUPR - API Reference Document
 
 language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
   - shell
   - ruby
   - python
   - javascript
+  - java
+  - csharp
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - <a href='https://mydupr.com/'>Sign Up for a Developer Key</a>
+  - <a href='https://mydupr.com/'>© 2023 DUPR</a>
 
 includes:
   - errors
@@ -20,7 +22,10 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for the DUPR APIs
+  - name: keywords
+    content: DUPR,Ratings,API,Documentation
+
 ---
 
 # Introduction
@@ -99,6 +104,10 @@ const kittn = require('kittn');
 
 let api = kittn.authorize('meowmeowmeow');
 let kittens = api.kittens.get();
+```
+
+```java
+
 ```
 
 > The above command returns JSON structured like this:
