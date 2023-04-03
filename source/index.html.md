@@ -1,5 +1,5 @@
 ---
-title: DUPR - API Reference Document
+title: DUPR - API Reference Document (BETA)
 
 language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
   - shell
@@ -25,11 +25,11 @@ meta:
 
 # Introduction
 
-Welcome to the DUPR API! You can use our API to upload matches in bulk, search players, get player ratings, fetch DUPR club members ratings, etc. from our database.
+Welcome to the **DUPR API v1.0 (BETA)**! You can use our API to upload matches in bulk, search players, get player ratings, fetch DUPR club members ratings, etc. from our database.
 
 You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-# Generate Credentials
+# Credentials
 
 To access these APIs you need to request client **secret** and **key** by contacting us via email on [support@mydupr.com](mailto:support@mydupr.com). Please mention your buiness entity name, contact email address and contact person name in request email. Generating client secret and key might take 1 - 3 working days. Once both client key and secret is generated you will receive it on provided offical email address.
 
@@ -59,7 +59,7 @@ Following are base url to access API endpoints:
 | Environment | Base URL |
 | :-: | :-: |
 | Production | - |
-| Test | https://uat.mydupr.com/api/ |
+| Test | https://test.mydupr.com/api/ |
 
 # Authentication
 
@@ -69,7 +69,7 @@ Following are base url to access API endpoints:
 ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be:cs-008a8f63f1fd5433fb2ea1a25fdec9c8
 ```
 
-> When above combination is Base64 encoded it should return following string.
+> When above combination is encoded with Base64, it should return exact same string.
 
 ```plaintext
 Y2stNmY2ZTlmM2QtY2E5Mi00OWE1LWZjZWQtMWJjYzM2ZWMxMjdiZTpjcy0wMDhhOGY2M2YxZmQ1NDMzZmIyZWExYTI1ZmRlYzljOA==
@@ -79,7 +79,7 @@ Y2stNmY2ZTlmM2QtY2E5Mi00OWE1LWZjZWQtMWJjYzM2ZWMxMjdiZTpjcy0wMDhhOGY2M2YxZmQ1NDMz
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl -X POST "https://<base-url>/auth/v1.0/token" \
+curl -X POST "https://test.mydupr.com/api/auth/v1.0/token" \
    -H "x-authorization: <your-credentials>"
 ```
 
@@ -101,6 +101,8 @@ Authentication API accepts combination of client key and secret colon separated 
 
 For example if your client secret is `cs-008a8f63f1fd5433fb2ea1a25fdec9c8` and your key is `ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be` then combine it as show below and encode it in Base64 string.
 
+`ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be:cs-008a8f63f1fd5433fb2ea1a25fdec9c8`
+
 Test credentials have prefix `test-`, for example `test-ck-<hash>` or `test-cs-<hash>`.
 
 Make a request to authenticate using credentials as the special header paramter as shown below:
@@ -116,16 +118,7 @@ You must replace <code>&lt;your-credentials&gt;</code> with your Base64 encoded 
 
 This resource provides APIs to get user ratings and allows you to create an unclaimed DUPR account for the users which are not on the platform.
 
-## Search
-
-Top-level API resource to have support via retrieval via "search" API methods. DUPR search API methods utilize cursor-based pagination via the `offset` parameter. For example you can make a initial request with `offset=0` or exclude `offset` parameter from request and then in subsequent calls keep on incrementing `offset` with `limit` i.e. `offset += limit`.
-
-### HTTP Request
-
-`GET https://<base-url>/user/{version}/search`
-
-
-### Request Body Paramters
+## Search Users
 
 > Example search request to reterive male users between 18 to 25 age lives in Austin, TX, USA with reliable doubles ratings between 2.3 and 3.3.
 
@@ -154,12 +147,20 @@ Top-level API resource to have support via retrieval via "search" API methods. D
 }
 ```
 
+Top-level API resource to have support via retrieval via "search" API methods. DUPR search API methods utilize cursor-based pagination via the `offset` parameter. For example you can make a initial request with `offset=0` or exclude `offset` parameter from request and then in subsequent calls keep on incrementing `offset` with `limit` i.e. `offset += limit`.
+
+### HTTP Request
+
+`POST https://<base-url>/user/{version}/search`
+
+
+### Request Body Paramters
+
 > To search users run this command with your access token.
 
 ```shell
-curl -X POST "https://<base-url>/user/v1.0/search" \
-     -H "accept: application/json" \
-     -H "Authorization: Bearer eyJhbGciOiJSUzUxMiJ9." \
+curl -X POST "https://test.mydupr.com/api/user/v1.0/search" \
+     -H "Authorization: Bearer <your-access-token>" \
      -H "Content-Type: application/json" \
      -d "{ 
           \"query\": \"*\",
@@ -215,7 +216,7 @@ rating    | object     |            | -          | Object criteria to restrict r
 You can filter results with 4 major facets: age, gender, location and rating. You can use one or any combination of the facets to narrow down the search.
 </aside>
 
-### Response Parameters
+### HTTP Response
 
 > The above command returns JSON structured like this:
 
@@ -303,7 +304,61 @@ id        | string  | Unique identifier for the user, generally known as DUPR ID
 fullName  | string  | Person's full name.
 firstName | string  | The person’s first name.
 lastName  | string  | The person’s last name.
-gender    | enum    | The person’s gender (International regulations require either “male” or “female”).
+gender    | enum    | The person’s gender (International regulations require either “MALE” or “FEMALE”).
+age       | int     | The person’s age in years.
+address   | string  | City level address in format (&lt;`county / city`&gt;, &lt;`state / region`&gt;, &lt;`country`&gt;).
+ratings   | object  | An object representation of ratings `singles` and `doubles`.
+singles   | double  | Singles rating of user. Default is `null`. Floating value between 2.0 and 8.0.
+isSinglesReliable   | boolean  | Weather singles rating of this person is reliable or not.
+doubles   | double  | Doubles rating of user. Default is `null`. Floating value between 2.0 and 8.0.
+isDoublesReliable   | boolean  | Weather doubles rating of this person is reliable or not.
+
+## Get User Rating
+
+```shell
+curl -X GET "https://test.mydupr.com/api/user/v1.0/V8DYL8" \
+     -H "Authorization: Bearer <your-access-token>"
+```
+
+This API gives most recent rating of DUPR user. You need to provide DUPR id which can be obtained via search API or user can find it in their application user profile.
+
+### HTTP Request
+
+`GET https://<base-url>/user/{version}/{id}`
+
+### Path Paramters
+
+| Parameter | Description |
+| :-------: | :---------: |
+| `id`      | DUPR ID user obtained by search or user can get it from user profile in app. |
+
+### HTTP Response
+
+```json
+{
+  "status": "SUCCESS",
+  "result": {
+    "id": "V8DYL8",
+    "fullName": "Ben Johns",
+    "firstName": "Ben",
+    "lastName": "Johns",
+    "ratings": {
+      "singles": "7.19",
+      "isSinglesReliable": true,
+      "doubles": "6.92",
+      "isDoublesReliable": true
+    }
+  }
+}
+```
+
+Parameter | Type    | Description
+--------- | :-----: | -----------
+id        | string  | Unique identifier for the user, generally known as DUPR ID.
+fullName  | string  | Person's full name.
+firstName | string  | The person’s first name.
+lastName  | string  | The person’s last name.
+gender    | enum    | The person’s gender (International regulations require either “MALE” or “FEMALE”).
 age       | int     | The person’s age in years.
 address   | string  | City level address in format (&lt;`county / city`&gt;, &lt;`state / region`&gt;, &lt;`country`&gt;).
 ratings   | object  | An object representation of ratings `singles` and `doubles`.
@@ -312,3 +367,490 @@ isSinglesReliable   | boolean  | Weather singles rating of this person is reliab
 doubles   | object  | Doubles rating of user. Default is `null`. Float value between 2.0 and 8.0.
 isDoublesReliable   | boolean  | Weather doubles rating of this person is reliable or not.
 
+
+## Create a User
+
+> All of the parameters are recommended to create a user. The detail helps us assign ratings to the correct user.
+
+```json
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "emailAddress": "john.doe@mydupr.com",
+  "isoAlpha2Code": "US",
+  "phoneNumber": "+12481234701",
+  "birthdate": "1973-09-25",
+  "age": 50,
+  "gender": "MALE",
+  "address": "Dripping Springs, Hays County, TX, USA",
+  "identifier": "unique-identifier"
+}
+```
+
+You can create a new user in case the user account is not present on DUPR platform. These created accounts will remain in unclaimed state until the actual user goes through the sign up flow and claims the account. It is recommended to provide birthdate or age, gender and location which helps us assign ratings to the correct user.
+
+### HTTP Request
+
+> To create a user run this command with your access token.
+
+```shell
+curl -X POST "https://test.mydupr.com/api/user/v1.0/create" \
+     -H "Authorization: Bearer <your-access-token>" \
+     -H "Content-Type: application/json" \
+     -d "{
+          \"firstName\": \"John\",
+          \"lastName\": \"Doe\",
+          \"emailAddress\": \"john.doe@mydupr.com\",
+          \"isoAlpha2Code\": \"US\",
+          \"phoneNumber\": \"+12481234701\",
+          \"birthdate\": \"1973-09-25\",
+          \"gender\": \"MALE\",
+          \"address\": \"Dripping Springs, Hays County, TX, USA\",
+          \"identifier\": \"unique-identifier\"
+        }"
+```
+
+`POST https://<base-url>/user/v1.0/create`
+
+### Request Body Paramters
+
+Parameter     | Description
+---------     | -----------
+firstName     | The person’s first name.
+lastName      | The person’s last name.
+emailAddress  | Email address using which the person will be registered and get notified.
+isoAlpha2Code | Standard 2 letters ISO code of a country in which phone number belongs.
+phoneNumber   | Phone number including country code.
+birthdate     | Birthdate of the person in ISO 8601 date format i.e. `yyyy-MM-dd`
+age           | Age of the person in years.
+gender        | The person’s gender (International regulations require either “MALE” or “FEMALE”).
+address       | Street level address in format (&lt;`street`&gt;, &lt;`county / city`&gt;, &lt;`state / region`&gt;, &lt;`country`&gt;).
+identifier    | A unique identifier from your end, it will help you identify user later.
+
+
+### HTTP Response
+
+> Once user is created successfully you should get alpha-numeric DUPR id in return.
+
+```json
+{
+  "status": "SUCCESS",
+  "message": "User created successfully",
+  "result": {
+    "id": "XOME32"
+  }
+}
+```
+
+Parameter | Type    | Description
+--------- | :-----: | -----------
+id        | string  | Unique identifier for the user, generally known as DUPR ID.
+
+# Match
+
+This resources provides APIs to upload or delete matches for your users.
+
+## Create Match
+
+> Example doubles match happened between Robert Lees (3LWVQ6), Adam Mitzel (3PZ5OZ) and Dave Conley (8JP24O), Matthew Fisher (30PDQ2) on 05th August 2022 at Newport Beach, CA, USA in The Newport Beach DUPR Waterfall Presented by Takeya tournament, Men's Doubles Flight C - 11AM bracket 
+
+```json
+{
+  "identifier": "99ec7e067b864df3998646f5a6a2800a23ba9a64",
+  "format": "DOUBLES",
+  "matchDate": "2022-08-05",
+  "location": "Newport Beach, CA, USA",
+  "matchSource": "TOURNAMENT",
+  "matchType": "SIDEOUT",
+  "event": "The Newport Beach DUPR Waterfall Presented by Takeya",
+  "bracket": "Men's Doubles Flight C - 11AM",
+  "clubId": 6224372156,
+  "teamA": {
+    "game1": 11,
+    "game2": 11,
+    "game3": null,
+    "game4": null,
+    "game5": null,
+    "player1": "3LWVQ6",
+    "player2": "3PZ5OZ"
+  },
+  "teamB": {
+    "game1": 3,
+    "game2": 3,
+    "game3": null,
+    "game4": null,
+    "game5": null,
+    "player1": "8JP24O",
+    "player2": "30PDQ2"
+  },
+  "extras": {
+    "key1": "value1"
+  }
+}
+```
+
+This API allows you to create a match on DUPR platform for your users, these matches will be consider while we process ratings for the users.
+
+### HTTP Request
+
+`POST https://<base-url>/match/{version}/create`
+
+### Request Body Paramters
+
+> To submit a match run this command with your access token.
+
+```shell
+curl -X POST "https://test.mydupr.com/api/match/v1.0/create" \
+     -H "Authorization: Bearer <your-access-token>" \
+     -H "Content-Type: application/json" \
+     -d "{ 
+        \"identifier\": \"99ec7e067b864df3998646f5a6a2800a23ba9a64\", 
+        \"format\": \"DOUBLES\", 
+        \"matchDate\": \"2022-08-05\", 
+        \"location\": \"Newport Beach, CA, USA\", 
+        \"matchSource\": \"TOURNAMENT\", 
+        \"matchType\": \"SIDEOUT\", 
+        \"event\": \"The Newport Beach DUPR Waterfall Presented by Takeya\", 
+        \"bracket\": \"Men's Doubles Flight C - 11AM\", 
+        \"clubId\": 6224372156,
+        \"teamA\": { 
+          \"game1\": 11, 
+          \"game2\": 11, 
+          \"game3\": null, 
+          \"game4\": null, 
+          \"game5\": null, 
+          \"player1\": \"3LWVQ6\", 
+          \"player2\": \"3PZ5OZ\" 
+        }, 
+        \"teamB\": { 
+          \"game1\": 3, 
+          \"game2\": 3, 
+          \"game3\": null, 
+          \"game4\": null, 
+          \"game5\": null, 
+          \"player1\": \"8JP24O\", 
+          \"player2\": \"30PDQ2\" 
+        }, 
+        \"extras\": { 
+          \"key1\": \"value1\" 
+        }
+    }"
+```
+
+Parameter | Default | Description
+--------- | :-----: | -----------
+identifier|         | An unique identifier per match from your end.
+format    |         | A match format either `DOUBLES` or `SINGLES`.
+matchDate |         | Date when this match played.
+location  |         | Street level address in format (&lt;`street`&gt;, &lt;`county / city`&gt;, &lt;`state / region`&gt;, &lt;`country`&gt;) where this match played.
+matchSource | `SELF`| Match source determins in what type of event this match was played. Match Sources: [`SELF`, `CLUB`, `TOURNAMENT`].
+matchType |`SIDEOUT`| Match type determins what type of match was played either `SIDEOUT` or `RALLY`.
+event     |         | In which event, tourament or league name this match was played.
+bracket   |         | In which bracket of tourament or league this match was played.
+clubId    |         | DUPR Club id of which this match was played.
+teamA     |         | Match team A object.
+teamB     |         | Match team B object.
+extras    |         | If there are any extra parameters you wish to attach in form of key-value pairs along with this match for your future reference.
+
+### Team Object
+
+Parameter | Default | Description
+--------- | :-----: | -----------
+player1   |         | DUPR id of player1, if not available create account using [Create a User](#create-a-user) API.
+player2   |         | DUPR id of player2, in case it's a `DOUBLES` match; if not available you can create account using [Create a User](#create-a-user) API.
+game1     |         | Score of this team in first game of match.
+game2     |         | Score of this team in second game of match, can be `null` if not played.
+game3     |         | Score of this team in third game of match, can be `null` if not played.
+game4     |         | Score of this team in forth game of match, can be `null` if not played
+game5     |         | Score of this team in fifth game of match, can be `null` if not played.
+
+### HTTP Response
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "SUCCESS",
+  "message": "Match submitted successfully",
+  "result": {
+    "id": "XOME32"
+  }
+}
+```
+
+Parameter | Type    | Description
+--------- | :-----: | -----------
+id        | string  | Unique identifier for this match, save it at your end to reterive this match in future.
+
+## Bulk Create Match
+
+> Array of create a match requests.
+
+```json
+[
+  {
+    "identifier": "99ec7e067b864df3998646f5a6a2800a23ba9a64",
+    "format": "DOUBLES",
+    "matchDate": "2022-08-05",
+    "location": "Newport Beach, CA, USA",
+    "matchSource": "TOURNAMENT",
+    "matchType": "SIDEOUT",
+    "event": "The Newport Beach DUPR Waterfall Presented by Takeya",
+    "bracket": "Men's Doubles Flight C - 11AM",
+    "clubId": 6224372156,
+    "teamA": {
+      "game1": 11,
+      "game2": 11,
+      "game3": null,
+      "game4": null,
+      "game5": null,
+      "player1": "3LWVQ6",
+      "player2": "3PZ5OZ"
+    },
+    "teamB": {
+      "game1": 3,
+      "game2": 3,
+      "game3": null,
+      "game4": null,
+      "game5": null,
+      "player1": "8JP24O",
+      "player2": "30PDQ2"
+    },
+    "extras": {
+      "key1": "value1"
+    }
+  }
+]
+```
+
+This resource help create matches in bulk for detail info check [Create Match](#create-match). At a time maximum 100 matches are accepted by this API.
+
+### HTTP Request
+
+`POST https://<base-url>/match/{version}/batch`
+
+<aside class="notice">
+Request body will contain create match request objects in array.
+</aside>
+
+> To submit a matches in bulk run this command with your access token.
+
+```shell
+curl -X POST "https://test.mydupr.com/api/match/v1.0/batch" \
+     -H "Authorization: Bearer <your-access-token>" \
+     -H "Content-Type: application/json" \
+     -d "[
+          { 
+            \"identifier\": \"99ec7e067b864df3998646f5a6a2800a23ba9a64\", 
+            \"format\": \"DOUBLES\", 
+            \"matchDate\": \"2022-08-05\", 
+            \"location\": \"Newport Beach, CA, USA\", 
+            \"matchSource\": \"TOURNAMENT\", 
+            \"matchType\": \"SIDEOUT\", 
+            \"event\": \"The Newport Beach DUPR Waterfall Presented by Takeya\", 
+            \"bracket\": \"Men's Doubles Flight C - 11AM\", 
+            \"clubId\": 6224372156,
+            \"teamA\": { 
+              \"game1\": 11, 
+              \"game2\": 11, 
+              \"game3\": null, 
+              \"game4\": null, 
+              \"game5\": null, 
+              \"player1\": \"3LWVQ6\", 
+              \"player2\": \"3PZ5OZ\" 
+            }, 
+            \"teamB\": { 
+              \"game1\": 3, 
+              \"game2\": 3, 
+              \"game3\": null, 
+              \"game4\": null, 
+              \"game5\": null, 
+              \"player1\": \"8JP24O\", 
+              \"player2\": \"30PDQ2\" 
+            }, 
+            \"extras\": { 
+              \"key1\": \"value1\" 
+            }
+        }
+     ]"
+```
+
+### HTTP Response
+
+<aside class="notice">
+Order of responses are exactly as provided in request. <code>null</code> element in <code>matchCodes</code> array represents some error occurred while submitting the match and detail present in errors array.
+</aside>
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "SUCCESS",
+  "message": "Matches submitted successfully",
+  "result": {
+    "errors" : [
+      {
+        //... match request key-value pairs.
+        "errors": {
+          "identifier": "Provide a unique identifier for this match.",
+          "matchDate": "Match date must be in ISO 8061 format date i.e. yyyy-MM-dd"
+        }
+      }
+    ],
+    "matchCodes": [null, "XOME32"]
+  }
+}
+```
+
+## Delete a Match
+
+> Example to delete doubles match happened between Robert Lees (3LWVQ6), Adam Mitzel (3PZ5OZ) and Dave Conley (8JP24O), Matthew Fisher (30PDQ2) with identifier <code>99ec7e067b864df3998646f5a6a2800a23ba9a64</code> and match code <code>XOME32</code>
+
+```json
+{
+  "identifier": "99ec7e067b864df3998646f5a6a2800a23ba9a64",
+  "matchCode": "XOME32"
+}
+```
+
+This API allows you to delete matches from DUPR platform, only which were added by you.
+
+### HTTP Request
+
+`DELETE https://<base-url>/match/{version}/delete`
+
+### Request Body Paramters
+
+Parameter | Default | Description
+--------- | :-----: | -----------
+identifier|         | An unique identifier of the match from your end.
+matchCode |         | DUPR id of the match received at the time of match creation.
+
+
+> To submit a match run this command with your access token.
+
+```shell
+curl -X DELETE "https://test.mydupr.com/api/match/v1.0/delete" \
+     -H "Authorization: Bearer <your-access-token>" \
+     -H "Content-Type: application/json" \
+     -d "{ 
+        \"identifier\": \"99ec7e067b864df3998646f5a6a2800a23ba9a64\", 
+        \"matchCode\": \"XOME32\"
+      }"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "SUCCESS",
+  "message": "Match deleted successfully"
+}
+```
+
+# Club
+
+This resources provides APIs to reterive club members ratings information.
+
+## Club Member Ratings
+
+> Example of reteriving ratings of club members of [Texas DUPR Flex Leagues](https://mydupr.com/dashboard/club/7614955351/info) club.
+
+```json
+{
+  "clubId": 7614955351
+}
+```
+
+This API allows you to reterive ratings of all the club members of a particular club by it's id.
+
+### HTTP Request
+
+`POST https://<base-url>/club/{version}/members`
+
+### Request Body Parameters
+
+> To reterive all club members rating run this command with your access token.
+
+```shell
+curl -X POST "https://test.mydupr.com/api/club/v1.0/members" \
+     -H "Authorization: Bearer <your-access-token>" \
+     -H "Content-Type: application/json" \
+     -d "{ 
+          \"clubId\": 7614955351
+        }"
+```
+
+Parameter | Type    | Description
+--------- | :-----: | -----------
+clubId    | int     | Unique DUPR club identifier.
+
+### HTTP Response
+
+```json
+{
+  "status": "SUCCESS",
+  "results": [
+    {
+      "id": "3L2961",
+      "fullName": "Austin Dempsey",
+      "firstName": "Austin",
+      "lastName": "Dempsey",
+      "ratings": {
+        "singles": "3.85",
+        "isSinglesReliable": false,
+        "doubles": "4.00",
+        "isDoublesReliable": true
+      }
+    },
+    {
+      "id": "89XGK3",
+      "fullName": "Joshua Arment",
+      "firstName": "Joshua",
+      "lastName": "Arment",
+      "ratings": {
+        "singles": "4.77",
+        "isSinglesReliable": false,
+        "doubles": "4.38",
+        "isDoublesReliable": true
+      }
+    },
+    {
+      "id": "8G4PG1",
+      "fullName": "Tomas Chase",
+      "firstName": "Tomas",
+      "lastName": "Chase",
+      "ratings": {
+        "singles": "3.39",
+        "isSinglesReliable": false,
+        "doubles": "3.55",
+        "isDoublesReliable": false
+      }
+    },
+    {
+      "id": "8KWNO8",
+      "fullName": "Ian Schumann",
+      "firstName": "Ian",
+      "lastName": "Schumann",
+      "ratings": {
+        "singles": "NR",
+        "isSinglesReliable": true,
+        "doubles": "4.09",
+        "isDoublesReliable": true
+      }
+    }
+  ]
+}
+```
+
+Parameter | Type    | Description
+--------- | :-----: | -----------
+id        | string  | Unique identifier for the user, generally known as DUPR ID.
+fullName  | string  | Person's full name.
+firstName | string  | The person’s first name.
+lastName  | string  | The person’s last name.
+ratings   | object  | An object representation of ratings `singles` and `doubles`.
+singles   | double  | Singles rating of user. Default is `null`. Floating value between 2.0 and 8.0.
+isSinglesReliable   | boolean  | Weather singles rating of this person is reliable or not.
+doubles   | double  | Doubles rating of user. Default is `null`. Floating value between 2.0 and 8.0.
+isDoublesReliable   | boolean  | Weather doubles rating of this person is reliable or not.
