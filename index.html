@@ -23,7 +23,7 @@
             content="DUPR,Ratings,API,Documentation"
         >
 
-    <title>DUPR - API Reference Document</title>
+    <title>DUPR - API Reference Document (BETA)</title>
 
     <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-icon-57x57-01de49cd.png">
     <link rel="apple-touch-icon" sizes="60x60" href="images/icons/apple-icon-60x60-a1a457fb.png">
@@ -362,7 +362,7 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#generate-credentials" class="toc-h1 toc-link" data-title="Generate Credentials">Generate Credentials</a>
+            <a href="#credentials" class="toc-h1 toc-link" data-title="Credentials">Credentials</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#client-secret" class="toc-h2 toc-link" data-title="Client Secret">Client Secret</a>
@@ -382,7 +382,35 @@
             <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#search" class="toc-h2 toc-link" data-title="Search">Search</a>
+                    <a href="#search-users" class="toc-h2 toc-link" data-title="Search Users">Search Users</a>
+                  </li>
+                  <li>
+                    <a href="#get-user-rating" class="toc-h2 toc-link" data-title="Get User Rating">Get User Rating</a>
+                  </li>
+                  <li>
+                    <a href="#create-a-user" class="toc-h2 toc-link" data-title="Create a User">Create a User</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#match" class="toc-h1 toc-link" data-title="Match">Match</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-match" class="toc-h2 toc-link" data-title="Create Match">Create Match</a>
+                  </li>
+                  <li>
+                    <a href="#bulk-create-match" class="toc-h2 toc-link" data-title="Bulk Create Match">Bulk Create Match</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-match" class="toc-h2 toc-link" data-title="Delete a Match">Delete a Match</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#club" class="toc-h1 toc-link" data-title="Club">Club</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#club-member-ratings" class="toc-h2 toc-link" data-title="Club Member Ratings">Club Member Ratings</a>
                   </li>
               </ul>
           </li>
@@ -399,10 +427,10 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the DUPR API! You can use our API to upload matches in bulk, search players, get player ratings, fetch DUPR club members ratings, etc. from our database.</p>
+<p>Welcome to the <strong>DUPR API v1.0 (BETA)</strong>! You can use our API to upload matches in bulk, search players, get player ratings, fetch DUPR club members ratings, etc. from our database.</p>
 
 <p>You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-<h1 id='generate-credentials'>Generate Credentials</h1>
+<h1 id='credentials'>Credentials</h1>
 <p>To access these APIs you need to request client <strong>secret</strong> and <strong>key</strong> by contacting us via email on <a href="mailto:support@mydupr.com">support@mydupr.com</a>. Please mention your buiness entity name, contact email address and contact person name in request email. Generating client secret and key might take 1 - 3 working days. Once both client key and secret is generated you will receive it on provided offical email address.</p>
 
 <p>Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.</p>
@@ -440,7 +468,7 @@ test-ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be</p>
 </tr>
 <tr>
 <td style="text-align: center">Test</td>
-<td style="text-align: center">https://uat.mydupr.com/api/</td>
+<td style="text-align: center">https://test.mydupr.com/api/</td>
 </tr>
 </tbody></table>
 <h1 id='authentication'>Authentication</h1>
@@ -450,7 +478,7 @@ test-ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be:cs-008a8f63f1fd5433fb2ea1a25fdec9c8
 </code></pre></div>
 <blockquote>
-<p>When above combination is Base64 encoded it should return following string.</p>
+<p>When above combination is encoded with Base64, it should return exact same string.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext tab-plaintext"><code>Y2stNmY2ZTlmM2QtY2E5Mi00OWE1LWZjZWQtMWJjYzM2ZWMxMjdiZTpjcy0wMDhhOGY2M2YxZmQ1NDMzZmIyZWExYTI1ZmRlYzljOA==
 </code></pre></div>
@@ -458,7 +486,7 @@ test-ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be</p>
 <p>To authorize, use this code command with your actual credentials:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="nt">-X</span> POST <span class="s2">"https://&lt;base-url&gt;/auth/v1.0/token"</span> <span class="se">\</span>
+curl <span class="nt">-X</span> POST <span class="s2">"https://test.mydupr.com/api/auth/v1.0/token"</span> <span class="se">\</span>
    <span class="nt">-H</span> <span class="s2">"x-authorization: &lt;your-credentials&gt;"</span>
 </code></pre></div>
 <blockquote>
@@ -478,6 +506,8 @@ curl <span class="nt">-X</span> POST <span class="s2">"https://&lt;base-url&gt;/
 
 <p>For example if your client secret is <code>cs-008a8f63f1fd5433fb2ea1a25fdec9c8</code> and your key is <code>ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be</code> then combine it as show below and encode it in Base64 string.</p>
 
+<p><code>ck-6f6e9f3d-ca92-49a5-fced-1bcc36ec127be:cs-008a8f63f1fd5433fb2ea1a25fdec9c8</code></p>
+
 <p>Test credentials have prefix <code>test-</code>, for example <code>test-ck-&lt;hash&gt;</code> or <code>test-cs-&lt;hash&gt;</code>.</p>
 
 <p>Make a request to authenticate using credentials as the special header paramter as shown below:</p>
@@ -489,11 +519,7 @@ You must replace <code>&lt;your-credentials&gt;</code> with your Base64 encoded 
 </aside>
 <h1 id='user'>User</h1>
 <p>This resource provides APIs to get user ratings and allows you to create an unclaimed DUPR account for the users which are not on the platform.</p>
-<h2 id='search'>Search</h2>
-<p>Top-level API resource to have support via retrieval via &quot;search&quot; API methods. DUPR search API methods utilize cursor-based pagination via the <code>offset</code> parameter. For example you can make a initial request with <code>offset=0</code> or exclude <code>offset</code> parameter from request and then in subsequent calls keep on incrementing <code>offset</code> with <code>limit</code> i.e. <code>offset += limit</code>.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://&lt;base-url&gt;/user/{version}/search</code></p>
-<h3 id='request-body-paramters'>Request Body Paramters</h3>
+<h2 id='search-users'>Search Users</h2>
 <blockquote>
 <p>Example search request to reterive male users between 18 to 25 age lives in Austin, TX, USA with reliable doubles ratings between 2.3 and 3.3.</p>
 </blockquote>
@@ -520,12 +546,15 @@ You must replace <code>&lt;your-credentials&gt;</code> with your Base64 encoded 
   </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<p>Top-level API resource to have support via retrieval via &quot;search&quot; API methods. DUPR search API methods utilize cursor-based pagination via the <code>offset</code> parameter. For example you can make a initial request with <code>offset=0</code> or exclude <code>offset</code> parameter from request and then in subsequent calls keep on incrementing <code>offset</code> with <code>limit</code> i.e. <code>offset += limit</code>.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://&lt;base-url&gt;/user/{version}/search</code></p>
+<h3 id='request-body-paramters'>Request Body Paramters</h3>
 <blockquote>
 <p>To search users run this command with your access token.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s2">"https://&lt;base-url&gt;/user/v1.0/search"</span> <span class="se">\</span>
-     <span class="nt">-H</span> <span class="s2">"accept: application/json"</span> <span class="se">\</span>
-     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer eyJhbGciOiJSUzUxMiJ9."</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s2">"https://test.mydupr.com/api/user/v1.0/search"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your-access-token&gt;"</span> <span class="se">\</span>
      <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
      <span class="nt">-d</span> <span class="s2">"{ 
           </span><span class="se">\"</span><span class="s2">query</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">*</span><span class="se">\"</span><span class="s2">,
@@ -691,7 +720,7 @@ You must replace <code>&lt;your-credentials&gt;</code> with your Base64 encoded 
 <aside class="notice">
 You can filter results with 4 major facets: age, gender, location and rating. You can use one or any combination of the facets to narrow down the search.
 </aside>
-<h3 id='response-parameters'>Response Parameters</h3>
+<h3 id='http-response'>HTTP Response</h3>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -835,7 +864,109 @@ You can filter results with 4 major facets: age, gender, location and rating. Yo
 <tr>
 <td>gender</td>
 <td style="text-align: center">enum</td>
-<td>The person’s gender (International regulations require either “male” or “female”).</td>
+<td>The person’s gender (International regulations require either “MALE” or “FEMALE”).</td>
+</tr>
+<tr>
+<td>age</td>
+<td style="text-align: center">int</td>
+<td>The person’s age in years.</td>
+</tr>
+<tr>
+<td>address</td>
+<td style="text-align: center">string</td>
+<td>City level address in format (&lt;<code>county / city</code>&gt;, &lt;<code>state / region</code>&gt;, &lt;<code>country</code>&gt;).</td>
+</tr>
+<tr>
+<td>ratings</td>
+<td style="text-align: center">object</td>
+<td>An object representation of ratings <code>singles</code> and <code>doubles</code>.</td>
+</tr>
+<tr>
+<td>singles</td>
+<td style="text-align: center">double</td>
+<td>Singles rating of user. Default is <code>null</code>. Floating value between 2.0 and 8.0.</td>
+</tr>
+<tr>
+<td>isSinglesReliable</td>
+<td style="text-align: center">boolean</td>
+<td>Weather singles rating of this person is reliable or not.</td>
+</tr>
+<tr>
+<td>doubles</td>
+<td style="text-align: center">double</td>
+<td>Doubles rating of user. Default is <code>null</code>. Floating value between 2.0 and 8.0.</td>
+</tr>
+<tr>
+<td>isDoublesReliable</td>
+<td style="text-align: center">boolean</td>
+<td>Weather doubles rating of this person is reliable or not.</td>
+</tr>
+</tbody></table>
+<h2 id='get-user-rating'>Get User Rating</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> GET <span class="s2">"https://test.mydupr.com/api/user/v1.0/V8DYL8"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your-access-token&gt;"</span>
+</code></pre></div>
+<p>This API gives most recent rating of DUPR user. You need to provide DUPR id which can be obtained via search API or user can find it in their application user profile.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://&lt;base-url&gt;/user/{version}/{id}</code></p>
+<h3 id='path-paramters'>Path Paramters</h3>
+<table><thead>
+<tr>
+<th style="text-align: center">Parameter</th>
+<th style="text-align: center">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><code>id</code></td>
+<td style="text-align: center">DUPR ID user obtained by search or user can get it from user profile in app.</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-2'>HTTP Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"V8DYL8"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ben Johns"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ben"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Johns"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"singles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7.19"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"isSinglesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"doubles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6.92"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"isDoublesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td style="text-align: center">string</td>
+<td>Unique identifier for the user, generally known as DUPR ID.</td>
+</tr>
+<tr>
+<td>fullName</td>
+<td style="text-align: center">string</td>
+<td>Person&#39;s full name.</td>
+</tr>
+<tr>
+<td>firstName</td>
+<td style="text-align: center">string</td>
+<td>The person’s first name.</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td style="text-align: center">string</td>
+<td>The person’s last name.</td>
+</tr>
+<tr>
+<td>gender</td>
+<td style="text-align: center">enum</td>
+<td>The person’s gender (International regulations require either “MALE” or “FEMALE”).</td>
 </tr>
 <tr>
 <td>age</td>
@@ -866,6 +997,641 @@ You can filter results with 4 major facets: age, gender, location and rating. Yo
 <td>doubles</td>
 <td style="text-align: center">object</td>
 <td>Doubles rating of user. Default is <code>null</code>. Float value between 2.0 and 8.0.</td>
+</tr>
+<tr>
+<td>isDoublesReliable</td>
+<td style="text-align: center">boolean</td>
+<td>Weather doubles rating of this person is reliable or not.</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-user'>Create a User</h2>
+<blockquote>
+<p>All of the parameters are recommended to create a user. The detail helps us assign ratings to the correct user.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"emailAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john.doe@mydupr.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"isoAlpha2Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+12481234701"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"birthdate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1973-09-25"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MALE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dripping Springs, Hays County, TX, USA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unique-identifier"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>You can create a new user in case the user account is not present on DUPR platform. These created accounts will remain in unclaimed state until the actual user goes through the sign up flow and claims the account. It is recommended to provide birthdate or age, gender and location which helps us assign ratings to the correct user.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<blockquote>
+<p>To create a user run this command with your access token.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s2">"https://test.mydupr.com/api/user/v1.0/create"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your-access-token&gt;"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     <span class="nt">-d</span> <span class="s2">"{
+          </span><span class="se">\"</span><span class="s2">firstName</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">John</span><span class="se">\"</span><span class="s2">,
+          </span><span class="se">\"</span><span class="s2">lastName</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Doe</span><span class="se">\"</span><span class="s2">,
+          </span><span class="se">\"</span><span class="s2">emailAddress</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">john.doe@mydupr.com</span><span class="se">\"</span><span class="s2">,
+          </span><span class="se">\"</span><span class="s2">isoAlpha2Code</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">US</span><span class="se">\"</span><span class="s2">,
+          </span><span class="se">\"</span><span class="s2">phoneNumber</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">+12481234701</span><span class="se">\"</span><span class="s2">,
+          </span><span class="se">\"</span><span class="s2">birthdate</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">1973-09-25</span><span class="se">\"</span><span class="s2">,
+          </span><span class="se">\"</span><span class="s2">gender</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">MALE</span><span class="se">\"</span><span class="s2">,
+          </span><span class="se">\"</span><span class="s2">address</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Dripping Springs, Hays County, TX, USA</span><span class="se">\"</span><span class="s2">,
+          </span><span class="se">\"</span><span class="s2">identifier</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">unique-identifier</span><span class="se">\"</span><span class="s2">
+        }"</span>
+</code></pre></div>
+<p><code>POST https://&lt;base-url&gt;/user/v1.0/create</code></p>
+<h3 id='request-body-paramters-2'>Request Body Paramters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>firstName</td>
+<td>The person’s first name.</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>The person’s last name.</td>
+</tr>
+<tr>
+<td>emailAddress</td>
+<td>Email address using which the person will be registered and get notified.</td>
+</tr>
+<tr>
+<td>isoAlpha2Code</td>
+<td>Standard 2 letters ISO code of a country in which phone number belongs.</td>
+</tr>
+<tr>
+<td>phoneNumber</td>
+<td>Phone number including country code.</td>
+</tr>
+<tr>
+<td>birthdate</td>
+<td>Birthdate of the person in ISO 8601 date format i.e. <code>yyyy-MM-dd</code></td>
+</tr>
+<tr>
+<td>age</td>
+<td>Age of the person in years.</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>The person’s gender (International regulations require either “MALE” or “FEMALE”).</td>
+</tr>
+<tr>
+<td>address</td>
+<td>Street level address in format (&lt;<code>street</code>&gt;, &lt;<code>county / city</code>&gt;, &lt;<code>state / region</code>&gt;, &lt;<code>country</code>&gt;).</td>
+</tr>
+<tr>
+<td>identifier</td>
+<td>A unique identifier from your end, it will help you identify user later.</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-3'>HTTP Response</h3>
+<blockquote>
+<p>Once user is created successfully you should get alpha-numeric DUPR id in return.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User created successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XOME32"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td style="text-align: center">string</td>
+<td>Unique identifier for the user, generally known as DUPR ID.</td>
+</tr>
+</tbody></table>
+<h1 id='match'>Match</h1>
+<p>This resources provides APIs to upload or delete matches for your users.</p>
+<h2 id='create-match'>Create Match</h2>
+<blockquote>
+<p>Example doubles match happened between Robert Lees (3LWVQ6), Adam Mitzel (3PZ5OZ) and Dave Conley (8JP24O), Matthew Fisher (30PDQ2) on 05th August 2022 at Newport Beach, CA, USA in The Newport Beach DUPR Waterfall Presented by Takeya tournament, Men&#39;s Doubles Flight C - 11AM bracket </p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99ec7e067b864df3998646f5a6a2800a23ba9a64"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DOUBLES"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"matchDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-05"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Newport Beach, CA, USA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"matchSource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOURNAMENT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"matchType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SIDEOUT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Newport Beach DUPR Waterfall Presented by Takeya"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bracket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Men's Doubles Flight C - 11AM"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"clubId"</span><span class="p">:</span><span class="w"> </span><span class="mi">6224372156</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"teamA"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"game1"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"game2"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"game3"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"game4"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"game5"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"player1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3LWVQ6"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"player2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3PZ5OZ"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"teamB"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"game1"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"game2"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"game3"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"game4"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"game5"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"player1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8JP24O"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"player2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30PDQ2"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"extras"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"key1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value1"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This API allows you to create a match on DUPR platform for your users, these matches will be consider while we process ratings for the users.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST https://&lt;base-url&gt;/match/{version}/create</code></p>
+<h3 id='request-body-paramters-3'>Request Body Paramters</h3>
+<blockquote>
+<p>To submit a match run this command with your access token.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s2">"https://test.mydupr.com/api/match/v1.0/create"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your-access-token&gt;"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     <span class="nt">-d</span> <span class="s2">"{ 
+        </span><span class="se">\"</span><span class="s2">identifier</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">99ec7e067b864df3998646f5a6a2800a23ba9a64</span><span class="se">\"</span><span class="s2">, 
+        </span><span class="se">\"</span><span class="s2">format</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">DOUBLES</span><span class="se">\"</span><span class="s2">, 
+        </span><span class="se">\"</span><span class="s2">matchDate</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">2022-08-05</span><span class="se">\"</span><span class="s2">, 
+        </span><span class="se">\"</span><span class="s2">location</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Newport Beach, CA, USA</span><span class="se">\"</span><span class="s2">, 
+        </span><span class="se">\"</span><span class="s2">matchSource</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">TOURNAMENT</span><span class="se">\"</span><span class="s2">, 
+        </span><span class="se">\"</span><span class="s2">matchType</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">SIDEOUT</span><span class="se">\"</span><span class="s2">, 
+        </span><span class="se">\"</span><span class="s2">event</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">The Newport Beach DUPR Waterfall Presented by Takeya</span><span class="se">\"</span><span class="s2">, 
+        </span><span class="se">\"</span><span class="s2">bracket</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Men's Doubles Flight C - 11AM</span><span class="se">\"</span><span class="s2">, 
+        </span><span class="se">\"</span><span class="s2">clubId</span><span class="se">\"</span><span class="s2">: 6224372156,
+        </span><span class="se">\"</span><span class="s2">teamA</span><span class="se">\"</span><span class="s2">: { 
+          </span><span class="se">\"</span><span class="s2">game1</span><span class="se">\"</span><span class="s2">: 11, 
+          </span><span class="se">\"</span><span class="s2">game2</span><span class="se">\"</span><span class="s2">: 11, 
+          </span><span class="se">\"</span><span class="s2">game3</span><span class="se">\"</span><span class="s2">: null, 
+          </span><span class="se">\"</span><span class="s2">game4</span><span class="se">\"</span><span class="s2">: null, 
+          </span><span class="se">\"</span><span class="s2">game5</span><span class="se">\"</span><span class="s2">: null, 
+          </span><span class="se">\"</span><span class="s2">player1</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">3LWVQ6</span><span class="se">\"</span><span class="s2">, 
+          </span><span class="se">\"</span><span class="s2">player2</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">3PZ5OZ</span><span class="se">\"</span><span class="s2"> 
+        }, 
+        </span><span class="se">\"</span><span class="s2">teamB</span><span class="se">\"</span><span class="s2">: { 
+          </span><span class="se">\"</span><span class="s2">game1</span><span class="se">\"</span><span class="s2">: 3, 
+          </span><span class="se">\"</span><span class="s2">game2</span><span class="se">\"</span><span class="s2">: 3, 
+          </span><span class="se">\"</span><span class="s2">game3</span><span class="se">\"</span><span class="s2">: null, 
+          </span><span class="se">\"</span><span class="s2">game4</span><span class="se">\"</span><span class="s2">: null, 
+          </span><span class="se">\"</span><span class="s2">game5</span><span class="se">\"</span><span class="s2">: null, 
+          </span><span class="se">\"</span><span class="s2">player1</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">8JP24O</span><span class="se">\"</span><span class="s2">, 
+          </span><span class="se">\"</span><span class="s2">player2</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">30PDQ2</span><span class="se">\"</span><span class="s2"> 
+        }, 
+        </span><span class="se">\"</span><span class="s2">extras</span><span class="se">\"</span><span class="s2">: { 
+          </span><span class="se">\"</span><span class="s2">key1</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">value1</span><span class="se">\"</span><span class="s2"> 
+        }
+    }"</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>identifier</td>
+<td style="text-align: center"></td>
+<td>An unique identifier per match from your end.</td>
+</tr>
+<tr>
+<td>format</td>
+<td style="text-align: center"></td>
+<td>A match format either <code>DOUBLES</code> or <code>SINGLES</code>.</td>
+</tr>
+<tr>
+<td>matchDate</td>
+<td style="text-align: center"></td>
+<td>Date when this match played.</td>
+</tr>
+<tr>
+<td>location</td>
+<td style="text-align: center"></td>
+<td>Street level address in format (&lt;<code>street</code>&gt;, &lt;<code>county / city</code>&gt;, &lt;<code>state / region</code>&gt;, &lt;<code>country</code>&gt;) where this match played.</td>
+</tr>
+<tr>
+<td>matchSource</td>
+<td style="text-align: center"><code>SELF</code></td>
+<td>Match source determins in what type of event this match was played. Match Sources: [<code>SELF</code>, <code>CLUB</code>, <code>TOURNAMENT</code>].</td>
+</tr>
+<tr>
+<td>matchType</td>
+<td style="text-align: center"><code>SIDEOUT</code></td>
+<td>Match type determins what type of match was played either <code>SIDEOUT</code> or <code>RALLY</code>.</td>
+</tr>
+<tr>
+<td>event</td>
+<td style="text-align: center"></td>
+<td>In which event, tourament or league name this match was played.</td>
+</tr>
+<tr>
+<td>bracket</td>
+<td style="text-align: center"></td>
+<td>In which bracket of tourament or league this match was played.</td>
+</tr>
+<tr>
+<td>clubId</td>
+<td style="text-align: center"></td>
+<td>DUPR Club id of which this match was played.</td>
+</tr>
+<tr>
+<td>teamA</td>
+<td style="text-align: center"></td>
+<td>Match team A object.</td>
+</tr>
+<tr>
+<td>teamB</td>
+<td style="text-align: center"></td>
+<td>Match team B object.</td>
+</tr>
+<tr>
+<td>extras</td>
+<td style="text-align: center"></td>
+<td>If there are any extra parameters you wish to attach in form of key-value pairs along with this match for your future reference.</td>
+</tr>
+</tbody></table>
+<h3 id='team-object'>Team Object</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>player1</td>
+<td style="text-align: center"></td>
+<td>DUPR id of player1, if not available create account using <a href="#create-a-user">Create a User</a> API.</td>
+</tr>
+<tr>
+<td>player2</td>
+<td style="text-align: center"></td>
+<td>DUPR id of player2, in case it&#39;s a <code>DOUBLES</code> match; if not available you can create account using <a href="#create-a-user">Create a User</a> API.</td>
+</tr>
+<tr>
+<td>game1</td>
+<td style="text-align: center"></td>
+<td>Score of this team in first game of match.</td>
+</tr>
+<tr>
+<td>game2</td>
+<td style="text-align: center"></td>
+<td>Score of this team in second game of match, can be <code>null</code> if not played.</td>
+</tr>
+<tr>
+<td>game3</td>
+<td style="text-align: center"></td>
+<td>Score of this team in third game of match, can be <code>null</code> if not played.</td>
+</tr>
+<tr>
+<td>game4</td>
+<td style="text-align: center"></td>
+<td>Score of this team in forth game of match, can be <code>null</code> if not played</td>
+</tr>
+<tr>
+<td>game5</td>
+<td style="text-align: center"></td>
+<td>Score of this team in fifth game of match, can be <code>null</code> if not played.</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-4'>HTTP Response</h3>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Match submitted successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XOME32"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td style="text-align: center">string</td>
+<td>Unique identifier for this match, save it at your end to reterive this match in future.</td>
+</tr>
+</tbody></table>
+<h2 id='bulk-create-match'>Bulk Create Match</h2>
+<blockquote>
+<p>Array of create a match requests.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99ec7e067b864df3998646f5a6a2800a23ba9a64"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DOUBLES"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"matchDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-05"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Newport Beach, CA, USA"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"matchSource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOURNAMENT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"matchType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SIDEOUT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Newport Beach DUPR Waterfall Presented by Takeya"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bracket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Men's Doubles Flight C - 11AM"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clubId"</span><span class="p">:</span><span class="w"> </span><span class="mi">6224372156</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"teamA"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"game1"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"game2"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"game3"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"game4"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"game5"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"player1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3LWVQ6"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"player2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3PZ5OZ"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"teamB"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"game1"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"game2"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"game3"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"game4"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"game5"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"player1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8JP24O"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"player2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30PDQ2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"extras"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"key1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value1"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>This resource help create matches in bulk for detail info check <a href="#create-match">Create Match</a>. At a time maximum 100 matches are accepted by this API.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST https://&lt;base-url&gt;/match/{version}/batch</code></p>
+
+<aside class="notice">
+Request body will contain create match request objects in array.
+</aside>
+
+<blockquote>
+<p>To submit a matches in bulk run this command with your access token.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s2">"https://test.mydupr.com/api/match/v1.0/batch"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your-access-token&gt;"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     <span class="nt">-d</span> <span class="s2">"[
+          { 
+            </span><span class="se">\"</span><span class="s2">identifier</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">99ec7e067b864df3998646f5a6a2800a23ba9a64</span><span class="se">\"</span><span class="s2">, 
+            </span><span class="se">\"</span><span class="s2">format</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">DOUBLES</span><span class="se">\"</span><span class="s2">, 
+            </span><span class="se">\"</span><span class="s2">matchDate</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">2022-08-05</span><span class="se">\"</span><span class="s2">, 
+            </span><span class="se">\"</span><span class="s2">location</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Newport Beach, CA, USA</span><span class="se">\"</span><span class="s2">, 
+            </span><span class="se">\"</span><span class="s2">matchSource</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">TOURNAMENT</span><span class="se">\"</span><span class="s2">, 
+            </span><span class="se">\"</span><span class="s2">matchType</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">SIDEOUT</span><span class="se">\"</span><span class="s2">, 
+            </span><span class="se">\"</span><span class="s2">event</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">The Newport Beach DUPR Waterfall Presented by Takeya</span><span class="se">\"</span><span class="s2">, 
+            </span><span class="se">\"</span><span class="s2">bracket</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Men's Doubles Flight C - 11AM</span><span class="se">\"</span><span class="s2">, 
+            </span><span class="se">\"</span><span class="s2">clubId</span><span class="se">\"</span><span class="s2">: 6224372156,
+            </span><span class="se">\"</span><span class="s2">teamA</span><span class="se">\"</span><span class="s2">: { 
+              </span><span class="se">\"</span><span class="s2">game1</span><span class="se">\"</span><span class="s2">: 11, 
+              </span><span class="se">\"</span><span class="s2">game2</span><span class="se">\"</span><span class="s2">: 11, 
+              </span><span class="se">\"</span><span class="s2">game3</span><span class="se">\"</span><span class="s2">: null, 
+              </span><span class="se">\"</span><span class="s2">game4</span><span class="se">\"</span><span class="s2">: null, 
+              </span><span class="se">\"</span><span class="s2">game5</span><span class="se">\"</span><span class="s2">: null, 
+              </span><span class="se">\"</span><span class="s2">player1</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">3LWVQ6</span><span class="se">\"</span><span class="s2">, 
+              </span><span class="se">\"</span><span class="s2">player2</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">3PZ5OZ</span><span class="se">\"</span><span class="s2"> 
+            }, 
+            </span><span class="se">\"</span><span class="s2">teamB</span><span class="se">\"</span><span class="s2">: { 
+              </span><span class="se">\"</span><span class="s2">game1</span><span class="se">\"</span><span class="s2">: 3, 
+              </span><span class="se">\"</span><span class="s2">game2</span><span class="se">\"</span><span class="s2">: 3, 
+              </span><span class="se">\"</span><span class="s2">game3</span><span class="se">\"</span><span class="s2">: null, 
+              </span><span class="se">\"</span><span class="s2">game4</span><span class="se">\"</span><span class="s2">: null, 
+              </span><span class="se">\"</span><span class="s2">game5</span><span class="se">\"</span><span class="s2">: null, 
+              </span><span class="se">\"</span><span class="s2">player1</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">8JP24O</span><span class="se">\"</span><span class="s2">, 
+              </span><span class="se">\"</span><span class="s2">player2</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">30PDQ2</span><span class="se">\"</span><span class="s2"> 
+            }, 
+            </span><span class="se">\"</span><span class="s2">extras</span><span class="se">\"</span><span class="s2">: { 
+              </span><span class="se">\"</span><span class="s2">key1</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">value1</span><span class="se">\"</span><span class="s2"> 
+            }
+        }
+     ]"</span>
+</code></pre></div><h3 id='http-response-5'>HTTP Response</h3>
+<aside class="notice">
+Order of responses are exactly as provided in request. <code>null</code> element in <code>matchCodes</code> array represents some error occurred while submitting the match and detail present in errors array.
+</aside>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Matches submitted successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"errors"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="err">//...</span><span class="w"> </span><span class="err">match</span><span class="w"> </span><span class="err">request</span><span class="w"> </span><span class="err">key-value</span><span class="w"> </span><span class="err">pairs.</span><span class="w">
+        </span><span class="nl">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Provide a unique identifier for this match."</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"matchDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Match date must be in ISO 8061 format date i.e. yyyy-MM-dd"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"matchCodes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s2">"XOME32"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='delete-a-match'>Delete a Match</h2>
+<blockquote>
+<p>Example to delete doubles match happened between Robert Lees (3LWVQ6), Adam Mitzel (3PZ5OZ) and Dave Conley (8JP24O), Matthew Fisher (30PDQ2) with identifier <code>99ec7e067b864df3998646f5a6a2800a23ba9a64</code> and match code <code>XOME32</code></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99ec7e067b864df3998646f5a6a2800a23ba9a64"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"matchCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XOME32"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This API allows you to delete matches from DUPR platform, only which were added by you.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>DELETE https://&lt;base-url&gt;/match/{version}/delete</code></p>
+<h3 id='request-body-paramters-4'>Request Body Paramters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>identifier</td>
+<td style="text-align: center"></td>
+<td>An unique identifier of the match from your end.</td>
+</tr>
+<tr>
+<td>matchCode</td>
+<td style="text-align: center"></td>
+<td>DUPR id of the match received at the time of match creation.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>To submit a match run this command with your access token.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> DELETE <span class="s2">"https://test.mydupr.com/api/match/v1.0/delete"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your-access-token&gt;"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     <span class="nt">-d</span> <span class="s2">"{ 
+        </span><span class="se">\"</span><span class="s2">identifier</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">99ec7e067b864df3998646f5a6a2800a23ba9a64</span><span class="se">\"</span><span class="s2">, 
+        </span><span class="se">\"</span><span class="s2">matchCode</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">XOME32</span><span class="se">\"</span><span class="s2">
+      }"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Match deleted successfully"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='club'>Club</h1>
+<p>This resources provides APIs to reterive club members ratings information.</p>
+<h2 id='club-member-ratings'>Club Member Ratings</h2>
+<blockquote>
+<p>Example of reteriving ratings of club members of <a href="https://mydupr.com/dashboard/club/7614955351/info">Texas DUPR Flex Leagues</a> club.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"clubId"</span><span class="p">:</span><span class="w"> </span><span class="mi">7614955351</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This API allows you to reterive ratings of all the club members of a particular club by it&#39;s id.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>POST https://&lt;base-url&gt;/club/{version}/members</code></p>
+<h3 id='request-body-parameters'>Request Body Parameters</h3>
+<blockquote>
+<p>To reterive all club members rating run this command with your access token.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s2">"https://test.mydupr.com/api/club/v1.0/members"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your-access-token&gt;"</span> <span class="se">\</span>
+     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     <span class="nt">-d</span> <span class="s2">"{ 
+          </span><span class="se">\"</span><span class="s2">clubId</span><span class="se">\"</span><span class="s2">: 7614955351
+        }"</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>clubId</td>
+<td style="text-align: center">int</td>
+<td>Unique DUPR club identifier.</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-6'>HTTP Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3L2961"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Austin Dempsey"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Austin"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dempsey"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"singles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.85"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isSinglesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"doubles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isDoublesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89XGK3"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joshua Arment"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joshua"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Arment"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"singles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.77"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isSinglesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"doubles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.38"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isDoublesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8G4PG1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tomas Chase"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tomas"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chase"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"singles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.39"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isSinglesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"doubles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.55"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isDoublesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8KWNO8"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ian Schumann"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ian"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Schumann"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ratings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"singles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NR"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isSinglesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"doubles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.09"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isDoublesReliable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td style="text-align: center">string</td>
+<td>Unique identifier for the user, generally known as DUPR ID.</td>
+</tr>
+<tr>
+<td>fullName</td>
+<td style="text-align: center">string</td>
+<td>Person&#39;s full name.</td>
+</tr>
+<tr>
+<td>firstName</td>
+<td style="text-align: center">string</td>
+<td>The person’s first name.</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td style="text-align: center">string</td>
+<td>The person’s last name.</td>
+</tr>
+<tr>
+<td>ratings</td>
+<td style="text-align: center">object</td>
+<td>An object representation of ratings <code>singles</code> and <code>doubles</code>.</td>
+</tr>
+<tr>
+<td>singles</td>
+<td style="text-align: center">double</td>
+<td>Singles rating of user. Default is <code>null</code>. Floating value between 2.0 and 8.0.</td>
+</tr>
+<tr>
+<td>isSinglesReliable</td>
+<td style="text-align: center">boolean</td>
+<td>Weather singles rating of this person is reliable or not.</td>
+</tr>
+<tr>
+<td>doubles</td>
+<td style="text-align: center">double</td>
+<td>Doubles rating of user. Default is <code>null</code>. Floating value between 2.0 and 8.0.</td>
 </tr>
 <tr>
 <td>isDoublesReliable</td>
