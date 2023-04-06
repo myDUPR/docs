@@ -25,7 +25,7 @@ meta:
 
 # Introduction
 
-Welcome to the **DUPR API v1.0 (BETA)**! You can use our API to upload matches in bulk, search players, get player ratings, fetch DUPR club members ratings, etc. from our database.
+Welcome to the **DUPR (Dynamic Universal Pickleball Ratings) API v1.0 (BETA)**! The DUPR platform is a web-based system that allows pickleball clubs, associations, tournament directors, and other interested parties to submit pickleball match data for processing and receive accurate player ratings. The system is designed to be flexible and scalable, allowing matches to be submitted in bulk. Additionally, the system provides APIs to access user individual ratings and club members ratings. All APIs use JWT token-based authentication to access the system. Currently, the APIs are in alpha testing mode.
 
 You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
